@@ -46,9 +46,9 @@ function median(a){ a.sort((x,y)=>x-y); return a[a.length>>1]; }
 
 document.getElementById(
   "exercise1-values"
-).innerText = 1 Cache Line: [${measureOneLine().join(", ")}];
+).innerText = `1 Cache Line: [${measureOneLine().join(", ")}]`;
 for (let i = 1; i < 100000000; i *= 10){
   document.getElementById(
   "exercise2-values"
-  ).innerText = N Cache Lines: [${measureNLines(i).join(", ")}];
+  ).innerText = `N Cache Lines: [${measureNLines(i).join(", ")}]`;
 }
