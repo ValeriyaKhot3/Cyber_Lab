@@ -8,10 +8,10 @@ let TRACE_LENGTH;
 let T;
 
 // Value of performance.now() when you started recording your trace
-let start;
+let start = 0;
 
 // the interval time fron start
-let time;
+let time =0 ;
 
 // Num of entire cache reading
 let cycles = 0;
@@ -23,17 +23,20 @@ let P_indx = 0;
 let cache_size = 12*(2**20);
 
 //L3 buffer
-let cache = new Uint8Array(cache_size);
+let cache;
 
 //Line cache size
 let line_size = 64;
 
 function record() {
-  console.log("start recoding + trace length:" + TRACE_LENGTH);
+  P_indx = 0;
+  start = 0;
+  time =0 ;
+  cycles = 0;
+
   // Create empty array for saving trace values
   T = new Array(TRACE_LENGTH);
-
-  console.log("T len : " + T.length);
+  cache = new Uint8Array(cache_size);
 
   // Fill array with -1 so we can be sure memory is allocated
   T.fill(-1, 0, T.length);
@@ -42,10 +45,11 @@ function record() {
   start = performance.now();
 
   // TODO (Exercise 2-2): Record data for TRACE_LENGTH seconds and save values to T.
-
+  console.log("start tracing");
   while(P_indx<T.length){
     cycles_count();
   }
+  console.log("end tracing");
     
 
   // Once done recording, send result to main thread
@@ -62,19 +66,16 @@ self.onmessage = (e) => {
 };
 
 function cycles_count(){
-  console.log("start counting");
   for(let i = 0; i< cache.length; i+=line_size){
     let val = cache[i];
     time = performance.now() - start;
     if(time >= P){
-      console.log("time : " + time);
       start = performance.now();
       T[P_indx++] = cycles;
       cycles = 0;
       break;
     }
     else if(i == cache.length-line_size){
-      console.log("DONE CYCLE");
       cycles++;
     }
   }
