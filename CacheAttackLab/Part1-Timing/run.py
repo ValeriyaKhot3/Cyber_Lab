@@ -8,7 +8,7 @@ from tqdm import tqdm
 
 # Run your code:
 # Make sure that your code is using print_results_for_python
-#executable_filename = ['make', 'run']
+executable_filename = ['make', 'run']
 
 
 num_runs = 100

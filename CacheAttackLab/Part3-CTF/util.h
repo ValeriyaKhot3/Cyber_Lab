@@ -22,4 +22,6 @@ CYCLES measure_one_block_access_time(ADDR_PTR addr);
 
 void clflush(ADDR_PTR addr);
 
+int find_mode(int arr[], int n);
+
 #endif

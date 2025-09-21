@@ -16,14 +16,12 @@
 #ifndef UTIL_H_
 #define UTIL_H_
 
-#define ADDR_PTR uint64_t 
-#define CYCLES uint32_t
 
-CYCLES measure_one_block_access_time(ADDR_PTR addr);
+uint32_t measure_one_block_access_time(uint64_t *addr);
 
 // You Should Not Use clflush in your final submission
 // It is only used for debug
-void clflush(ADDR_PTR addr);
+void clflush(uint64_t *addr);
 
 char *string_to_binary(char *s);
 char *binary_to_string(char *data);

@@ -31,3 +31,27 @@ void clflush(ADDR_PTR addr)
 {
     asm volatile ("clflush (%0)"::"r"(addr));
 }
+
+// Function to find the mode of the array
+int find_mode(int arr[], int n) {
+    int mode = arr[0];
+    int max_count = 0;
+    
+    // Loop over each element in the array
+    for (int i = 0; i < n; i++) {
+        int count = 0;
+        // Count occurrences of arr[i]
+        for (int j = 0; j < n; j++) {
+            if (arr[j] == arr[i]) {
+                count++;
+            }
+        }
+        // Update mode if current element's count is higher than max_count
+        if (count > max_count) {
+            max_count = count;
+            mode = arr[i];
+        }
+    }
+    
+    return mode;
+}

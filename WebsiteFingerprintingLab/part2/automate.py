@@ -53,7 +53,7 @@ def root():
 def static_dir(path):
     return send_from_directory(f"part{opts.part}", path)
 
-flask_thread = threading.Thread(target=app.run, kwargs={"port": 1234})
+flask_thread = threading.Thread(target=app.run, kwargs={"port": 8000})
 flask_thread.setDaemon(True)
 flask_thread.start()
 
@@ -74,7 +74,7 @@ def get_browser(victim):
         return webdriver.Safari()
 
 attacker = get_browser(victim=False)
-attacker.get("http://localhost:1234")
+attacker.get("http://localhost:8000")
 attacker.execute_script(f"window.trace_length = {opts.trace_length}")
 attacker.execute_script(f"window.using_automation_script = true")
 

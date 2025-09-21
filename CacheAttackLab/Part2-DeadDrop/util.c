@@ -2,9 +2,9 @@
 #include "util.h"
 
 /* Measure the time it takes to access a block with virtual address addr. */
-CYCLES measure_one_block_access_time(ADDR_PTR addr)
+uint32_t measure_one_block_access_time(uint64_t *addr)
 {
-	CYCLES cycles;
+	uint32_t cycles;
 
 	asm volatile("mov %1, %%r8\n\t"
 	"lfence\n\t"
@@ -27,7 +27,7 @@ CYCLES measure_one_block_access_time(ADDR_PTR addr)
  * Note: clflush is provided to help you debug and should not be used in your
  * final submission
  */
-void clflush(ADDR_PTR addr)
+void clflush(uint64_t addr)
 {
     asm volatile ("clflush (%0)"::"r"(addr));
 }
